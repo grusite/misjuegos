@@ -1,9 +1,11 @@
 <template>
-  <div>Home.vue! + {{ store.state.count }} + {{ store.state.text }}</div>
+  <div>Home.vue! </div>
 </template>
 
 <script setup lang="ts">
-import { useStore } from '@/store'
 
-const store = useStore()
+// {{ store.state.count }} + {{ store.state.text }}
+// import { useStore } from './store'
+
+// const store = useStore()
 </script>
