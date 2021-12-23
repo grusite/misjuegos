@@ -1,6 +1,8 @@
-import firebase from 'firebase'
+import firebase from 'firebase/app'
+import { getFirestore } from 'firebase/firestore'
+import { getAuth } from 'firebase/auth'
 
-const firebaseApp = firebase.initializeApp({
+export const firebaseApp = firebase.initializeApp({
   apiKey: 'AIzaSyATjICFY96bTvLgTudiA2AGu50w2oQmGWk',
   authDomain: 'misjuegos-b9cbc.firebaseapp.com',
   databaseURL: 'https://misjuegos-b9cbc-default-rtdb.europe-west1.firebasedatabase.app/',
@@ -10,5 +12,6 @@ const firebaseApp = firebase.initializeApp({
   appId: '1:476322127299:web:2be417648ce5cc70aef176',
 })
 
-export const db = firebaseApp.database()
-export default firebaseApp
+export const auth = getAuth()
+
+export const db = getFirestore(firebaseApp)

@@ -10,21 +10,21 @@ const state = reactive<State>({
   other: '',
 })
 
-const getters = {
-  isEven: computed(() => {
-    return state.count % 2 == 0
-  }),
-}
-
 const actions = {
   increment: () => {
     state.count++
   },
 }
 
+const getters = {
+  isEven: computed(() => {
+    return state.count % 2 == 0
+  }),
+}
+
 export const store = {
   state: readonly(state),
-  getters,
   actions,
+  getters,
   ref: <K extends keyof State>(key: K) => toRef(state, key),
 }

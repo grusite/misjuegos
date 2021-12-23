@@ -4,7 +4,7 @@ import { reactive, computed, readonly, toRef } from 'vue'
 // import Register from './components/Register.vue'
 // import Login from './components/Login.vue'
 
-import { store } from './store2'
+import { store } from './stores'
 
 const a = store.ref('other')
 </script>
@@ -18,7 +18,7 @@ const a = store.ref('other')
     </nav>
 
     <div>Count: {{ store.state.count }}</div>
-    <div>Is Even?: {{ store.getters.isEven }}</div>
+    <div>Is Even?: {{ store.getters.isEven }} + {{ a }}</div>
     <button
       class="
         px-2
