@@ -19,7 +19,6 @@ Technologies used:
 - Vite
 - Vue 3 + TS
 - Tailwind (UI)
-- Firebase (along vuefire) to autenticate users and to store user data
 - Route management with Vue Router 4.x
 - State management with Vuex 4.x
 - Husky + lint-staged git hooks to lint all the code in the staging area and to test (with jest) the application just before the commit
@@ -53,16 +52,6 @@ npm run serve
 ```bash
 # Don't forget to build (and test) the app first
 $ npm run deploy
-# or
-$ firebase deploy
-```
-
-**Important**
-In order to deploy, you need to have installed **Firebase** in your local machine. In case you dont have it, please do it, and after, login with your Firebase account (the one you have permissions in 2GoTours):
-
-```bash
-$ npm install -g firebase-tools
-$ firebase login
 ```
 
 ### Lints and fixes files
