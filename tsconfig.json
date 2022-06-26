@@ -11,8 +11,9 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "types": [
+      "node",
+      "vitest/globals",
       "vite/client",
-      "vitest/globals"
     ]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

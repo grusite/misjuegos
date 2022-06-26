@@ -1,12 +1,16 @@
 <template>
-  <div>
-    <Navbar />
-    <div class="min-h-screen bg-zinc-50">
-      <router-view />
-    </div>
-  </div>
+  <component :is="layout">
+    <router-view />
+  </component>
 </template>
 
 <script setup lang="ts">
-import Navbar from './components/Navbar.vue'
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+
+const defaultLayout = 'default'
+
+const { currentRoute } = useRouter()
+
+const layout = computed(() => `${currentRoute.value.meta.layout || defaultLayout}-layout`)
 </script>

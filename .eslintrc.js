@@ -4,7 +4,7 @@ module.exports = {
     node: true,
     es2021: true,
   },
-  extends: ['plugin:vue/essential', 'plugin:jest/recommended'],
+  extends: ['plugin:vue/essential'],
   parserOptions: {
     ecmaVersion: 12,
     parser: '@typescript-eslint/parser',
@@ -19,5 +19,8 @@ module.exports = {
         moduleDirectory: ['node_modules', 'src/'],
       },
     },
+  },
+  rules: {
+    'vue/multi-word-component-names': 'off',
   },
 }

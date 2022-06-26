@@ -31,18 +31,7 @@
           </router-link>
           <router-link
             to="/register"
-            class="
-              font-semibold
-              py-2
-              px-3
-              bg-zinc-700
-              hover:bg-zinc-600
-              text-emerald-400
-              hover:text-emerald-300
-              rounded
-              transition
-              duration-300
-            "
+            class="font-semibold py-2 px-3 bg-zinc-700 hover:bg-zinc-600 text-emerald-400 hover:text-emerald-300 rounded transition duration-300"
           >
             Register
           </router-link>
