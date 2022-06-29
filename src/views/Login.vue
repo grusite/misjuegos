@@ -5,13 +5,13 @@
         <img src="@/assets/logo-text.svg" alt="Logo of MisEscapes" />
       </div>
 
-      <form class="mt-4" @submit.prevent="login">
+      <form class="mt-4" @submit.prevent="login(identifier, password)">
         <label class="block">
-          <span class="text-sm text-gray-700">Email</span>
+          <span class="text-sm text-gray-700">Identifier</span>
           <input
-            type="email"
+            type="text"
             class="block w-full mt-1 border-gray-200 rounded-md focus:border-pink-700 focus:ring focus:ring-opacity-40 focus:ring-pink-600"
-            v-model="email"
+            v-model="identifier"
           />
         </label>
 
@@ -57,13 +57,14 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useUserStore } from '../stores/user'
 
-const router = useRouter()
-const email = ref('grusite@gmail.com')
-const password = ref('jorge123#')
+const userStore = useUserStore()
 
-function login() {
-  router.push('/dashboard')
+const identifier = ref('')
+const password = ref('')
+
+async function login(identifier: string, password: string) {
+  await userStore.localSignIn(identifier, password)
 }
 </script>

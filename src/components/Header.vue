@@ -83,11 +83,12 @@
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-600 hover:text-white"
               >Products</a
             >
-            <router-link
-              to="/"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-600 hover:text-white"
-              >Log out</router-link
+            <div
+              class="block px-4 py-2 cursor-pointer text-sm text-gray-700 hover:bg-pink-600 hover:text-white"
+              @click="logout"
             >
+              Log out
+            </div>
           </div>
         </transition>
       </div>
@@ -97,8 +98,14 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useSidebar } from '../hooks/useSidebar'
+import { useUserStore } from '../stores/user'
+import { useSidebar } from '../composables/useSidebar'
 
 const dropdownOpen = ref(false)
 const { isOpen } = useSidebar()
+
+const userStore = useUserStore()
+function logout() {
+  userStore.userSignOut()
+}
 </script>

@@ -10,11 +10,14 @@ import DashboardLayout from './components/DashboardLayout.vue'
 import EmptyLayout from './components/EmptyLayout.vue'
 
 const app = createApp(App)
+const pinia = createPinia()
 
 // Global components
-app.component('default-layout', DashboardLayout).component('empty-layout', EmptyLayout)
+app.component('default-layout', DashboardLayout)
+app.component('empty-layout', EmptyLayout)
 
 // Global plugins
-app.use(router).use(createPinia())
+app.use(pinia)
+app.use(router)
 
 app.mount('#app')

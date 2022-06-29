@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { useUserStore } from '../stores/user'
 
-// import Home from '@/views/Home.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import Forms from '@/views/Forms.vue'
 import Tables from '@/views/Tables.vue'
@@ -16,7 +16,10 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     name: 'Login',
     component: Login,
-    meta: { layout: 'empty' },
+    meta: {
+      layout: 'empty',
+      allowAnonymous: true,
+    },
   },
   {
     path: '/dashboard',
@@ -63,6 +66,21 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+})
+
+router.beforeEach((to, from, next) => {
+  const userStore = useUserStore()
+
+  const noRequiresAuth = to.matched.some((record) => record.meta.allowAnonymous === true)
+  const isAuthenticated = userStore.isAuthenticated
+
+  if (noRequiresAuth && isAuthenticated) {
+    next('/dashboard')
+  } else if (to.name !== 'Login' && !isAuthenticated) {
+    next('/')
+  } else {
+    next()
+  }
 })
 
 export default router

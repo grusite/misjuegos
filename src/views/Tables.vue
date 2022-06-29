@@ -293,7 +293,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTableData } from '../hooks/useTableData'
+import { useTableData } from '../composables/useTableData'
 
 const { simpleTableData, paginatedTableData, wideTableData } = useTableData()
 </script>

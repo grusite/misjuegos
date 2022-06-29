@@ -172,7 +172,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useSidebar } from '../hooks/useSidebar'
+import { useSidebar } from '../composables/useSidebar'
 
 const { isOpen } = useSidebar()
 const activeClass = ref('bg-gray-600 bg-opacity-25 text-gray-100 border-pink-700')
