@@ -81,7 +81,7 @@
             <a
               href="#"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-600 hover:text-white"
-              >Products</a
+              >Mis Juegos</a
             >
             <div
               class="block px-4 py-2 cursor-pointer text-sm text-gray-700 hover:bg-pink-600 hover:text-white"

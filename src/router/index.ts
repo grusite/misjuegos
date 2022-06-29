@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import { useUserStore } from '../stores/user'
 
 import Dashboard from '@/views/Dashboard.vue'
+import Input from '@/views/Input.vue'
 import Forms from '@/views/Forms.vue'
 import Tables from '@/views/Tables.vue'
 import UIElements from '@/views/UIElements.vue'
@@ -25,6 +26,11 @@ const routes: RouteRecordRaw[] = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
+  },
+  {
+    path: '/input',
+    name: 'Input',
+    component: Input,
   },
   {
     path: '/forms',

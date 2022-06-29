@@ -6,7 +6,7 @@ import Debug from 'debug'
 const debug = Debug('app:request')
 
 const request = axios.create({
-  baseURL: 'https:/misjuegos-cms.herokuapp.com/v1',
+  baseURL: 'https://strapi.misjuegos.net' + '/v1',
   // timeout: 10000,
   headers: {
     Accept: 'application/json',

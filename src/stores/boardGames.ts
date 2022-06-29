@@ -1,12 +1,24 @@
 import { defineStore } from 'pinia'
 
 import client from '../config/api/client'
-import { BoardGameStrapi, boardGameStrapiMapper } from '../config/api/mapper'
+import {
+  BoardGameMapped,
+  BoardGameStrapi,
+  boardGameStrapiMapper,
+  GameMapped,
+  GameStrapi,
+  gameStrapiMapper,
+} from '../config/api/mapper'
+
+const savedBoardGame = localStorage.getItem('boardGame')
+const savedBoardGames = localStorage.getItem('boardGames')
+const savedGames = localStorage.getItem('games')
 
 export const useBoardGamesStore = defineStore('boardGame', {
   state: () => ({
-    currentBoardGame: {},
-    boardGames: [],
+    currentBoardGame: (savedBoardGame ? JSON.parse(savedBoardGame) : {}) as BoardGameMapped,
+    boardGames: (savedBoardGames ? JSON.parse(savedBoardGames) : []) as BoardGameMapped[],
+    games: (savedGames ? JSON.parse(savedGames) : []) as GameMapped[],
   }),
   getters: {
     getBoardGame(state) {
@@ -15,17 +27,22 @@ export const useBoardGamesStore = defineStore('boardGame', {
     getBoardGames(state) {
       return state.boardGames
     },
+    getGameByName(state) {
+      return (name: string) => state.games.find((game) => game.name === name)
+    },
   },
   actions: {
     async fetchBoardGames() {
       type BoardGameStrapiApi = {
-        data: BoardGameStrapi[]
-        meta: {
-          pagination: {
-            page: number
-            pageSize: number
-            pageCount: number
-            total: number
+        data: {
+          data: BoardGameStrapi[]
+          meta: {
+            pagination: {
+              page: number
+              pageSize: number
+              pageCount: number
+              total: number
+            }
           }
         }
       }
@@ -34,15 +51,38 @@ export const useBoardGamesStore = defineStore('boardGame', {
         url: '/board-games?populate=*',
       })
 
-      console.log({ res })
-
-      const boardGames = res.data.map((boardGame: BoardGameStrapi) => {
+      const boardGames = (res as BoardGameStrapiApi).data.data.map((boardGame) => {
         return boardGameStrapiMapper(boardGame)
       })
 
-      console.log({ boardGames })
-
+      localStorage.setItem('boardGames', JSON.stringify(boardGames))
       this.boardGames = boardGames
+    },
+
+    async fetchCovers() {
+      type GameStrapiApi = {
+        data: {
+          data: GameStrapi[]
+          meta: {
+            pagination: {
+              page: number
+              pageSize: number
+              pageCount: number
+              total: number
+            }
+          }
+        }
+      }
+      const res = await client({
+        url: '/games?populate=*',
+      })
+
+      const games = (res as GameStrapiApi).data.data.map((game) => {
+        return gameStrapiMapper(game)
+      })
+
+      localStorage.setItem('games', JSON.stringify(games))
+      this.games = games
     },
   },
 })

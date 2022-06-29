@@ -41,15 +41,15 @@
             </div>
 
             <div class="mx-5">
-              <h4 class="text-2xl font-semibold text-gray-700">8,282</h4>
-              <div class="text-gray-500">New Users</div>
+              <h4 class="text-2xl font-semibold text-gray-700">315</h4>
+              <div class="text-gray-500">Total Games</div>
             </div>
           </div>
         </div>
 
         <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 sm:mt-0">
           <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
-            <div class="p-3 bg-pink-600 bg-opacity-75 rounded-full">
+            <div class="p-3 bg-green-600 bg-opacity-75 rounded-full">
               <svg
                 class="w-8 h-8 text-white"
                 viewBox="0 0 28 28"
@@ -72,8 +72,8 @@
             </div>
 
             <div class="mx-5">
-              <h4 class="text-2xl font-semibold text-gray-700">200,521</h4>
-              <div class="text-gray-500">Total Orders</div>
+              <h4 class="text-2xl font-semibold text-gray-700">290</h4>
+              <div class="text-gray-500">Total Succeed</div>
             </div>
           </div>
         </div>
@@ -103,8 +103,8 @@
             </div>
 
             <div class="mx-5">
-              <h4 class="text-2xl font-semibold text-gray-700">215,542</h4>
-              <div class="text-gray-500">Available Products</div>
+              <h4 class="text-2xl font-semibold text-gray-700">25</h4>
+              <div class="text-gray-500">Total Fails</div>
             </div>
           </div>
         </div>
@@ -122,43 +122,52 @@
             <thead>
               <tr>
                 <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
+                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-100 uppercase border-b border-gray-200 bg-pink-600"
                 >
-                  Name
+                  Game
                 </th>
                 <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
+                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-100 uppercase border-b border-gray-200 bg-pink-600"
                 >
-                  Title
+                  Expansion
                 </th>
                 <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
+                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-100 uppercase border-b border-gray-200 bg-pink-600"
                 >
-                  Status
+                  Players
                 </th>
                 <th
-                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
+                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-100 uppercase border-b border-gray-200 bg-pink-600"
                 >
-                  Role
+                  Duration
                 </th>
-                <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+                <th
+                  class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-100 uppercase border-b border-gray-200 bg-pink-600"
+                >
+                  Succeed
+                </th>
+                <th class="px-6 py-3 border-b border-gray-200 bg-pink-600"></th>
               </tr>
             </thead>
 
             <tbody class="bg-white">
-              <tr v-for="(u, index) in users" :key="index">
+              <tr v-for="(u, index) in boardGames" :key="index">
                 <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 w-10 h-10">
-                      <img class="w-10 h-10 rounded-full" src="@/assets/img/avatar.jpg" alt="" />
+                      <img
+                        class="w-10 h-10 rounded-full"
+                        :src="boardGameStore.getGameByName(u.gameName)?.coverImg"
+                        alt=""
+                      />
                     </div>
 
                     <div class="ml-4">
                       <div class="text-sm font-medium leading-5 text-gray-900">
-                        {{ u.name }}
+                        {{ u.gameName }}
                       </div>
                       <div class="text-sm leading-5 text-gray-500">
-                        {{ u.email }}
+                        {{ u.startDate }}
                       </div>
                     </div>
                   </div>
@@ -166,24 +175,34 @@
 
                 <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                   <div class="text-sm leading-5 text-gray-900">
-                    {{ u.title }}
+                    {{ u.expansion }}
                   </div>
-                  <div class="text-sm leading-5 text-gray-500">
-                    {{ u.title2 }}
-                  </div>
+                  <div class="text-sm leading-5 text-gray-500">Mission {{ u.mission }}</div>
                 </td>
 
                 <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                  <span
-                    class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full"
-                    >{{ u.status }}</span
-                  >
+                  <div class="text-sm leading-5 text-gray-500">
+                    {{ u.players[0]?.name }} {{ u.players[1]?.name }}
+                  </div>
+                  <div class="text-sm leading-5 text-gray-500">
+                    {{ u.players[2]?.name }} {{ u.players[3]?.name }}
+                  </div>
                 </td>
 
                 <td
                   class="px-6 py-4 text-sm leading-5 text-gray-500 border-b border-gray-200 whitespace-nowrap"
                 >
-                  {{ u.role }}
+                  {{ u.duration }} h
+                </td>
+
+                <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
+                  <span
+                    class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full"
+                    :class="[
+                      u.success ? 'bg-green-500 text-green-100' : 'bg-pink-500 text-pink-100',
+                    ]"
+                    >{{ u.success }}</span
+                  >
                 </td>
 
                 <td
@@ -197,29 +216,36 @@
         </div>
       </div>
     </div>
+    <div
+      class="flex flex-col items-center px-5 py-5 bg-white border-t xs:flex-row xs:justify-between border-gray-200 shadow sm:rounded-lg"
+    >
+      <span class="text-xs text-gray-900 xs:text-sm">Showing 1 to 4 of 50 Entries</span>
+
+      <div class="inline-flex mt-2 xs:mt-0">
+        <button
+          class="px-4 py-2 text-sm font-semibold text-gray-100 bg-pink-600 rounded-l hover:bg-gray-400"
+        >
+          Prev
+        </button>
+        <button
+          class="px-4 py-2 text-sm font-semibold text-gray-100 bg-pink-600 rounded-r hover:bg-gray-400"
+        >
+          Next
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { useBoardGamesStore } from '../stores/boardGames'
 
-interface User {
-  name: string
-  email: string
-  title: string
-  title2: string
-  status: string
-  role: string
-}
+const boardGameStore = useBoardGamesStore()
+const boardGames = boardGameStore.boardGames
 
-const testUser: User = {
-  name: 'Jorge Martín',
-  email: 'grusite@gmail.com.com',
-  title: 'Software Engineer',
-  title2: 'Web dev',
-  status: 'Active',
-  role: 'Owner',
-}
-
-const users = ref<User[]>([...Array(10).keys()].map(() => testUser))
+onMounted(async () => {
+  await boardGameStore.fetchBoardGames()
+  await boardGameStore.fetchCovers()
+})
 </script>
