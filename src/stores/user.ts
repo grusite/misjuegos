@@ -6,10 +6,15 @@ import { userStrapiMapper } from '../config/api/mapper'
 
 const savedUser = localStorage.getItem('user')
 
+const defaultState = {
+  user: {},
+  token: '',
+}
+
 export const useUserStore = defineStore('user', {
   state: () => ({
-    user: savedUser ? JSON.parse(savedUser) : {},
-    token: localStorage.getItem('bearer') || '',
+    user: savedUser ? JSON.parse(savedUser) : defaultState.user,
+    token: localStorage.getItem('bearer') || defaultState.token,
   }),
   getters: {
     isAuthenticated: (state) => !!state.token,
@@ -63,9 +68,9 @@ export const useUserStore = defineStore('user', {
       })
     },
     userSignOut() {
-      this.$reset()
       localStorage.clear()
-      router.go()
+      Object.assign(this, defaultState)
+      router.push('/')
     },
   },
 })
