@@ -10,7 +10,8 @@
     "coverage": "vitest run --coverage",
     "lint": "eslint --fix",
     "prepare": "husky install",
-    "deploy": ""
+    "rename": "node -e \"require('fs').rename('dist/index.html', 'dist/200.html', function(err) { if (err) console.log(err); console.log('File successfully renamed!') })\"",
+    "deploy": "npm run rename && surge dist -d https://misjuegos.net"
   },
   "lint-staged": {
     "*.{vue,js,ts}": "eslint --cache --fix --cache-location ./node_modules/.cache/.eslintcache"
