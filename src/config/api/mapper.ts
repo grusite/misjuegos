@@ -1,7 +1,7 @@
 interface PlayersStrapi {
   id: number
   attributes: {
-    Name: string
+    name: string
     createdAt: Date
     updatedAt: Date
     publishedAt: Date
@@ -59,7 +59,7 @@ export function boardGameStrapiMapper(boardGameStrapi: BoardGameStrapi): BoardGa
     notes: boardGameStrapi.attributes.notes,
     players: boardGameStrapi.attributes.players.data.map((player) => {
       return {
-        name: player.attributes.Name,
+        name: player.attributes.name,
       }
     }),
   }
@@ -104,11 +104,11 @@ export interface Cover {
 export interface GameStrapi {
   id: number
   attributes: {
-    Name: string
+    name: string
     createdAt: Date
     updatedAt: Date
     publishedAt: Date
-    Cover: Cover
+    cover: Cover
   }
 }
 
@@ -119,10 +119,8 @@ export interface GameMapped {
 
 export function gameStrapiMapper(gameStrapi: GameStrapi): GameMapped {
   return {
-    name: gameStrapi.attributes.Name,
-    coverImg:
-      'https://strapi.misjuegos.net' +
-      gameStrapi.attributes.Cover.data.attributes.formats.thumbnail.url,
+    name: gameStrapi.attributes.name,
+    coverImg: gameStrapi.attributes.cover.data.attributes.formats.thumbnail.url,
   }
 }
 
